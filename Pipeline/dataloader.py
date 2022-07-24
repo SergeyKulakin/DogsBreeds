@@ -2,8 +2,10 @@ import tarfile
 import torch
 from torchvision.datasets import ImageFolder
 from torch.utils.data import DataLoader
+import torchvision.transforms as T
 
 import config as conf
+import results as res
 
 def dataset_load(path=conf.path, path_unzip=conf.path_unzip):
     '''INPUT
@@ -18,7 +20,7 @@ def dataset_load(path=conf.path, path_unzip=conf.path_unzip):
     return
 
 
-def get_dataloader(train_transform=conf.train_transform, val_transform=conf.val_transform, path_work=conf.path_work, batch_size=conf.batch_size):
+def get_dataloader(path_work=conf.path_work, batch_size=conf.batch_size, shape_resize=conf.shape_resize):
     '''INPUT
             -> train_transform: params transformation train data
             -> val_transform: params transformation val data
@@ -26,6 +28,21 @@ def get_dataloader(train_transform=conf.train_transform, val_transform=conf.val_
             -> batch_size: number of images in batch
         OUTPUT
             -> train_dataloader, val_dataloader'''
+
+    # DataSet
+    train_transform = T.Compose([
+        T.Resize(shape_resize),
+        T.ToTensor(),
+        T.Normalize(
+            mean=res.normalize_dict['train']['mean'],
+            std=res.normalize_dict['train']['std'])])
+
+    val_transform = T.Compose([
+        T.Resize(shape_resize),
+        T.ToTensor(),
+        T.Normalize(
+            mean=res.normalize_dict['val']['mean'],
+            std=res.normalize_dict['val']['std'])])
 
     train_dataset = ImageFolder(
         f'{path_work}/train',
