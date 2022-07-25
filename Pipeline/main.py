@@ -36,7 +36,7 @@ train_dataloader, val_dataloader = dl.get_dataloader(conf.path_work, conf.batch_
 
 
 # Запуск экспериментов
-for num_experiment in range(1, 4): # всего 3 эксперимента
+for num_experiment in range(1, 5): # всего 4 эксперимента
     # Pipeline 4
     if not os.path.isdir(f'{conf.path_unzip}/{num_experiment}'):
         os.mkdir(f'{conf.path_unzip}/{num_experiment}')
