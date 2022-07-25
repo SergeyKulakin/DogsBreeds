@@ -4,7 +4,7 @@ from IPython.display import clear_output
 # Модули
 import config as conf
 import ploting as pl
-import logging as lg
+import log_history as lg
 import results as res
 
 def train(model, optimizer, train_dataloader, val_dataloader, criterion=conf.cr, n_epochs=conf.def_n_ep, device=conf.dev):
@@ -21,7 +21,7 @@ def train(model, optimizer, train_dataloader, val_dataloader, criterion=conf.cr,
         OUTPUT
             -> trainded model
     '''
-
+    best_score = [0, 0]  # [num_epoch, best_score]
     train_loss_log, train_acc_log, val_loss_log, val_acc_log = [], [], [], []
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=n_epochs, eta_min=0.0001, last_epoch=-1,
                                                            verbose=False)
@@ -89,7 +89,7 @@ def train(model, optimizer, train_dataloader, val_dataloader, criterion=conf.cr,
         print("Val acc:", VaAc)
 
         # будем сохранять лучший результат
-        if VaAc >= res.best_score[1]:
-            res.best_score[0], res.best_score[1] = epoch, VaAc
+        if VaAc >= best_score[1]:
+            best_score[0], best_score[1] = epoch, VaAc
 
-    return
+    return best_score
