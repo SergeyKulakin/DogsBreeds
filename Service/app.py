@@ -6,7 +6,7 @@ from PIL import Image
 import model
 
 app = Flask(__name__)
-app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
+app.config['MAX_CONTENT_LENGTH'] = 2024 * 2024
 app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.gif', '.jpeg', '.JPEG']
 app.config['UPLOAD_PATH'] = 'static/img'
 
