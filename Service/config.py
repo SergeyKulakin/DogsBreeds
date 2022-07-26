@@ -1,6 +1,6 @@
 import torch
 
-path_model = 'static/model_2.pt'
+path_model = 'static/model_4.pt'
 shape_resize = (224, 224)
 dev = torch.device("cuda:0") if torch.cuda.is_available() else torch.device("cpu") # device
 

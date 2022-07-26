@@ -1,5 +1,6 @@
-from flask import Flask, request, render_template, redirect, url_for, abort, flash, jsonify, make_response
+from flask import Flask, request, render_template, redirect, url_for, abort
 from werkzeug.utils import secure_filename
+from argparse import ArgumentParser
 import os
 from PIL import Image
 import model
@@ -9,6 +10,12 @@ app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
 app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.gif', '.jpeg', '.JPEG']
 app.config['UPLOAD_PATH'] = 'static/img'
 
+def parse_args():
+    """Parse input arguments"""
+    parser = ArgumentParser('Test web app')
+    parser.add_argument('--port', type=int, help='Port to use')
+    parser.add_argument('--host', type=str, help='Host to use')
+    return parser.parse_args()
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
@@ -28,19 +35,10 @@ def upload_files():
             label = model.predict_image(im)
 
         return render_template('predict.html', predict=label.capitalize(), user_image=file_path)
-
     else:
         return redirect(url_for('home'))
 
-'''@login_required
-def delete_item(item_id):
-    new_id = item_id
-    item = self.session.query(Item).get(item_id)
-    os.remove(os.path.join(app.config['UPLOADED_ITEMS_DEST'], item.filename))
-    self.session.delete(item)
-    db.session.commit()
-    return redirect(url_for('admin_items'))'''
-
 
 if __name__ == '__main__':
-    app.run()
+    args = parse_args()
+    app.run(host=args.host, port=args.port)
