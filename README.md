@@ -8,6 +8,10 @@
     - **densenet161 (лучшая модель)**
     - densenet201
   ### Результаты экспериментов:
+<img src="F:\Проекты\SBER CV\Loss_best_model.png">
+
+<img src="F:\Проекты\SBER CV\Accuracy_best_model.png">
+
 Получена accuracy - **0.951**
 
 Presicion score for each class:
