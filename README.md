@@ -42,5 +42,10 @@ Presicion score for each class:
 ## Структура
 
 - Pipeline - каталог с CV pipeline
-- Service - каталог с сервисом на Flask
+- Service - каталог с сервисом на Flask + Dockerfile
+- Tgbot - каталог с Telegram bot-ом классифицирующим породы собак
 - Dogs Breeds - ноутбук с разведочным анализом и черновиками pipeline
+
+## Дополнительно
+- В проекте реализован Docker образ для сервиса на Flask
+- Реализован Telegram bot классифицирующий породы собак
