@@ -8,6 +8,9 @@
     - **densenet161 (лучшая модель)**
     - densenet201
   ### Результаты экспериментов:
+![plot](Pipeline/dataset/Loss_best_model.png)
+![plot](Pipeline/dataset/Accuracy_best_model.png)
+
 Получена accuracy - **0.951**
 
 Presicion score for each class:
