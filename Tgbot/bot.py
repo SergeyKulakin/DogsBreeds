@@ -25,7 +25,6 @@ def build_menu(buttons, n_cols,
 def welcome_start(msg, text='Dogs Breeds Classifier приветствует тебя!'):
     '''Функция Старт'''
     button_list = [InlineKeyboardButton('Классифицировать фото', callback_data='foto')]
-        #InlineKeyboardButton('Ввести текст', callback_data='text')]
 
     # сборка клавиатуры из кнопок `InlineKeyboardButton`
     reply_markup = InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
@@ -51,11 +50,9 @@ def image_open(msg):
             with Image.open(file_path) as im:
                 label = model.predict_image(im)
                 bot.send_message(msg.chat.id, label.capitalize())
-            #bot.send_photo(msg.chat.id, im)
 
         except Exception as e:
             pass
-            #bot.reply_to(msg, e)
     else:
         bot.send_message(msg, "Хорошо, отменяем. Чем еще могу помочь?")
 
